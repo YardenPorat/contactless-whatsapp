@@ -1,0 +1,44 @@
+.app {
+  text-align: center;
+}
+
+.inputs {
+  margin: 30px auto;
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+}
+
+.inputs > * {
+  width: 100%;
+}
+
+.input {
+  background-color: white;
+}
+
+.phoneContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.phone {
+  flex: 1;
+}
+
+.whatsapp,
+.whatsapp:link,
+.whatsapp:visited {
+  background-color: var(--teal-dark) !important;
+  color: white;
+}
+
+.whatsapp:active,
+.whatsapp:hover,
+.whatsapp *:hover {
+  background-color: var(--teal) !important;
+}
