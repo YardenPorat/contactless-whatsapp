@@ -1,7 +1,7 @@
 name: test
 on:
   push:
-    branches: [master]
+    branches: [main]
 jobs:
   deploy:
     name: deploy with node ${{ matrix.node-version }} / ${{ matrix.os }}
