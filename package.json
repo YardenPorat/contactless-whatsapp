@@ -1,6 +1,6 @@
 {
   "name": "whatsapp-contactless-sender",
-  "homepage": "http://yardenporat.github.io/whatsapp-sender",
+  "homepage": "https://github.com/YardenPorat/whatsapp-messenger",
   "version": "0.1.0",
   "dependencies": {
     "@emotion/react": "^11.10.4",
