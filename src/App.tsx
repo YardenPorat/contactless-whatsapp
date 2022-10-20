@@ -81,6 +81,17 @@ function App() {
                     Send
                 </Button>
             </div>
+            <footer className={classes.copyright}>
+                Made by{' '}
+                <a
+                    className="button button-secondary"
+                    href="https://www.linkedin.com/in/yarden-porat/"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    Yarden Porat
+                </a>
+            </footer>
         </div>
     );
 }

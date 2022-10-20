@@ -9,7 +9,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 300px;
+  max-width: 300px;
 }
 
 .inputs > * {
@@ -41,4 +41,8 @@
 .whatsapp:hover,
 .whatsapp *:hover {
   background-color: var(--teal) !important;
+}
+
+.copyright {
+  margin-top: auto;
 }
