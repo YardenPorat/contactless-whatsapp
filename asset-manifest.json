@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/whatsapp-sender/static/css/main.930a5812.css",
-    "main.js": "/whatsapp-sender/static/js/main.5175827b.js",
-    "index.html": "/whatsapp-sender/index.html",
-    "main.930a5812.css.map": "/whatsapp-sender/static/css/main.930a5812.css.map",
-    "main.5175827b.js.map": "/whatsapp-sender/static/js/main.5175827b.js.map"
+    "main.css": "/YardenPorat/whatsapp-messenger/static/css/main.930a5812.css",
+    "main.js": "/YardenPorat/whatsapp-messenger/static/js/main.5175827b.js",
+    "index.html": "/YardenPorat/whatsapp-messenger/index.html",
+    "main.930a5812.css.map": "/YardenPorat/whatsapp-messenger/static/css/main.930a5812.css.map",
+    "main.5175827b.js.map": "/YardenPorat/whatsapp-messenger/static/js/main.5175827b.js.map"
   },
   "entrypoints": [
     "static/css/main.930a5812.css",
