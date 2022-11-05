@@ -34,7 +34,6 @@ function App() {
 
     return (
         <div className={classes.app}>
-            123
             <div className={classes.inputs}>
                 <Autocomplete<Option>
                     id="country-code"
