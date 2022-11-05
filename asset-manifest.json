@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/whatsapp-messenger/static/css/main.9d78081e.css",
-    "main.js": "/whatsapp-messenger/static/js/main.212ebae3.js",
+    "main.js": "/whatsapp-messenger/static/js/main.eff06988.js",
     "index.html": "/whatsapp-messenger/index.html",
     "main.9d78081e.css.map": "/whatsapp-messenger/static/css/main.9d78081e.css.map",
-    "main.212ebae3.js.map": "/whatsapp-messenger/static/js/main.212ebae3.js.map"
+    "main.eff06988.js.map": "/whatsapp-messenger/static/js/main.eff06988.js.map"
   },
   "entrypoints": [
     "static/css/main.9d78081e.css",
-    "static/js/main.212ebae3.js"
+    "static/js/main.eff06988.js"
   ]
 }
