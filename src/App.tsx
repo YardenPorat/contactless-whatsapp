@@ -1,19 +1,38 @@
-import classes from './App.module.css';
-import TextField from '@mui/material/TextField';
-import React, { useCallback, useState } from 'react';
-import InputLabel from '@mui/material/InputLabel';
-import { countryCodesOptions, ISRAEL, Option } from './constants/country-codes';
 import Autocomplete from '@mui/material/Autocomplete';
-import { getPhoneWithPrefix } from './utils/sanitize-phone';
 import Button from '@mui/material/Button';
+import InputLabel from '@mui/material/InputLabel';
+import React, { useCallback, useState } from 'react';
+import TextField from '@mui/material/TextField';
+import classes from './App.module.css';
+import { Snackbar } from '@mui/material';
+import { countryCodesOptions, ISRAEL, Option } from './constants/country-codes';
+import { getPhoneWithPrefix } from './utils/sanitize-phone';
 import { localStorageService } from './services/local-storage';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import { Share } from './components/Share';
+import { isHebrew } from './utils/rtl';
+import { SavedMessages } from './components/SavedMessages';
+import { Copyright } from './components/Footer';
 
-const isHebrew = (str: string) => /[\u0590-\u05FF]/.test(str);
+const labelProps = {
+    sx: {
+        '&.MuiInputLabel-shrink': {
+            backgroundColor: 'rgba(239,242,245,.8)',
+            border: '1px solid #ccc',
+            p: '1px 5px',
+            borderRadius: '10px',
+        },
+    },
+};
+
 function App() {
     const [phone, setPhone] = useState(localStorageService.getPhone());
     const [message, setMessage] = useState(localStorageService.getMessage());
-    const dir = isHebrew(message) ? 'rtl' : 'ltr';
+
+    const [snackbarMessage, setSnackbarMessage] = useState('');
     const [countryCode, setCountryCode] = useState(localStorageService.getCountryCode() || ISRAEL);
+
+    const dir = isHebrew(message) ? 'rtl' : 'ltr';
 
     const handlePhoneChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setPhone(e.target.value);
@@ -32,67 +51,78 @@ function App() {
         }
     }, []);
 
+    const closeSnackbar = () => setSnackbarMessage('');
+
+    const handleSend = () => {
+        if (!phone) {
+            setSnackbarMessage('Missing phone number');
+            return;
+        }
+
+        const phoneNumber = getPhoneWithPrefix(phone, countryCode?.value);
+        const whatsappUri = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+        window.open(whatsappUri, '_blank');
+    };
+
     return (
-        <div className={classes.app}>
-            <div className={classes.inputs}>
-                <Autocomplete<Option>
-                    id="country-code"
-                    options={countryCodesOptions}
-                    onChange={handleCountryCodeChange}
-                    value={countryCode}
-                    className={classes.input}
-                    renderInput={(params) => <TextField {...params} label="Country Code" />}
-                />
-                <div className={classes.phoneContainer}>
-                    <TextField
-                        id="outlined-basic"
-                        label="Phone number"
-                        variant="outlined"
-                        value={phone}
-                        onChange={handlePhoneChange}
-                        className={`${classes.phone} ${classes.input}`}
+        <>
+            <div className={classes.app}>
+                <div className={classes.inputs}>
+                    <Autocomplete<Option>
+                        id="country-code"
+                        options={countryCodesOptions}
+                        onChange={handleCountryCodeChange}
+                        value={countryCode}
+                        className={classes.input}
+                        renderInput={(params) => <TextField {...params} label="Country Code" />}
                     />
-                    {/* <Button className={classes.whatsapp} variant="contained">
-                        Add
-                    </Button> */}
+                    <div className={classes.phoneContainer}>
+                        <TextField
+                            id="outlined-basic"
+                            label="Phone number"
+                            variant="outlined"
+                            value={phone}
+                            onChange={handlePhoneChange}
+                            className={`${classes.phone} ${classes.input}`}
+                            InputLabelProps={labelProps}
+                        />
+                    </div>
+                    <InputLabel>Output number: +{getPhoneWithPrefix(phone, countryCode?.value)}</InputLabel>
+                    <SavedMessages setSnackbarMessage={setSnackbarMessage} message={message} setMessage={setMessage} />
+                    <TextField
+                        label="Message"
+                        multiline
+                        rows={4}
+                        value={message}
+                        onChange={handleMessageChange}
+                        dir={dir}
+                        className={classes.input}
+                        placeholder="Type your message here"
+                        InputLabelProps={labelProps}
+                    />
+                    <Button
+                        className={classes.whatsapp}
+                        onClick={handleSend}
+                        sx={{ bgcolor: 'unset' }}
+                        variant="contained"
+                        startIcon={<WhatsAppIcon />}
+                    >
+                        Send
+                    </Button>
+                    <footer className={classes.footer}>
+                        <Copyright />
+                        <Share setSnackbarMessage={setSnackbarMessage} />
+                    </footer>
                 </div>
-                <InputLabel>Output number: +{getPhoneWithPrefix(phone, countryCode?.value)}</InputLabel>
-                <TextField
-                    id="outlined-multiline-flexible"
-                    label="Message"
-                    multiline
-                    rows={4}
-                    value={message}
-                    onChange={handleMessageChange}
-                    dir={dir}
-                    className={classes.input}
-                    placeholder="Type your message here"
-                />
-                <Button
-                    className={classes.whatsapp}
-                    href={`https://api.whatsapp.com/send?phone=${getPhoneWithPrefix(
-                        phone,
-                        countryCode?.value
-                    )}&text=${encodeURIComponent(message)}`}
-                    sx={{ bgcolor: 'unset' }}
-                    target="_blank"
-                    variant="contained"
-                >
-                    Send
-                </Button>
             </div>
-            <footer className={classes.copyright}>
-                Made by{' '}
-                <a
-                    className="button button-secondary"
-                    href="https://www.linkedin.com/in/yarden-porat/"
-                    target="_blank"
-                    rel="noreferrer"
-                >
-                    Yarden Porat
-                </a>
-            </footer>
-        </div>
+
+            <Snackbar
+                open={!!snackbarMessage}
+                onClose={closeSnackbar}
+                autoHideDuration={3000}
+                message={snackbarMessage}
+            />
+        </>
     );
 }
 

@@ -23,6 +23,7 @@
     "no-restricted-imports": ["error", "mocha"],
     "react/prop-types": "off",
     "react/no-unknown-property": "off",
+    "react/react-in-jsx-scope": "off",
     "no-empty-pattern": "off"
   },
   "overrides": [
