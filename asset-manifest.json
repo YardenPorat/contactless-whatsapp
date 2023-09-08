@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/contactless-whatsapp/static/css/main.1e77ac32.css",
-    "main.js": "/contactless-whatsapp/static/js/main.212ebae3.js",
+    "main.css": "/contactless-whatsapp/static/css/main.97321d52.css",
+    "main.js": "/contactless-whatsapp/static/js/main.0883ec8f.js",
     "index.html": "/contactless-whatsapp/index.html",
-    "main.1e77ac32.css.map": "/contactless-whatsapp/static/css/main.1e77ac32.css.map",
-    "main.212ebae3.js.map": "/contactless-whatsapp/static/js/main.212ebae3.js.map"
+    "main.97321d52.css.map": "/contactless-whatsapp/static/css/main.97321d52.css.map",
+    "main.0883ec8f.js.map": "/contactless-whatsapp/static/js/main.0883ec8f.js.map"
   },
   "entrypoints": [
-    "static/css/main.1e77ac32.css",
-    "static/js/main.212ebae3.js"
+    "static/css/main.97321d52.css",
+    "static/js/main.0883ec8f.js"
   ]
 }
