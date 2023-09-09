@@ -1,0 +1,13 @@
+.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-shrink {
+  background-color: rgba(239, 242, 245, 0.8);
+  border: 1px solid #e1e1e1;
+  padding: 1px 6px;
+  border-radius: 10px;
+  left: -5px;
+}
+
+.MuiAutocomplete-root,
+.MuiFormControl-root.MuiTextField-root {
+  border-radius: 4px;
+  background-color: #fff;
+}

@@ -14,16 +14,16 @@ import { isHebrew } from './utils/rtl';
 import { SavedMessages } from './components/SavedMessages';
 import { Copyright } from './components/Footer';
 
-const labelProps = {
-    sx: {
-        '&.MuiInputLabel-shrink': {
-            backgroundColor: 'rgba(239,242,245,.8)',
-            border: '1px solid #ccc',
-            p: '1px 5px',
-            borderRadius: '10px',
-        },
-    },
-};
+// const labelProps = {
+//     sx: {
+//         '&.MuiInputLabel-shrink': {
+//             backgroundColor: 'rgba(239,242,245,.8)',
+//             border: '1px solid #ccc',
+//             p: '1px 5px',
+//             borderRadius: '10px',
+//         },
+//     },
+// };
 
 function App() {
     const [phone, setPhone] = useState(localStorageService.getPhone());
@@ -73,20 +73,16 @@ function App() {
                         options={countryCodesOptions}
                         onChange={handleCountryCodeChange}
                         value={countryCode}
-                        className={classes.input}
                         renderInput={(params) => <TextField {...params} label="Country Code" />}
                     />
-                    <div className={classes.phoneContainer}>
-                        <TextField
-                            id="outlined-basic"
-                            label="Phone number"
-                            variant="outlined"
-                            value={phone}
-                            onChange={handlePhoneChange}
-                            className={`${classes.phone} ${classes.input}`}
-                            InputLabelProps={labelProps}
-                        />
-                    </div>
+                    <TextField
+                        id="outlined-basic"
+                        label="Phone number"
+                        variant="outlined"
+                        value={phone}
+                        onChange={handlePhoneChange}
+                        className={classes.phone}
+                    />
                     <InputLabel>Output number: +{getPhoneWithPrefix(phone, countryCode?.value)}</InputLabel>
                     <SavedMessages setSnackbarMessage={setSnackbarMessage} message={message} setMessage={setMessage} />
                     <TextField
@@ -96,9 +92,7 @@ function App() {
                         value={message}
                         onChange={handleMessageChange}
                         dir={dir}
-                        className={classes.input}
                         placeholder="Type your message here"
-                        InputLabelProps={labelProps}
                     />
                     <Button
                         className={classes.whatsapp}

@@ -16,16 +16,6 @@
   width: 100%;
 }
 
-.input {
-  background-color: white;
-}
-
-.phoneContainer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .phone {
   flex: 1;
 }
