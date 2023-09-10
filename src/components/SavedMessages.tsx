@@ -4,9 +4,9 @@ import SaveIcon from '@mui/icons-material/Save';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Collapse, Box, List, ListItem, ListItemButton, ListItemText, type SxProps } from '@mui/material';
 import { isHebrew } from '../utils/rtl';
-import { EMPTY_OBJECT } from '../constants/misc';
 
 const collapseSx = { width: '100%', maxWidth: 360, bgcolor: 'background.paper' };
 const listItemTextSx = { minHeight: '20px' };
@@ -43,6 +43,11 @@ export const SavedMessages = ({
         setMessagesPanelOpen((prev) => !prev);
     };
 
+    const handleDelete = (message: string) => {
+        const updatedStore = localStorageService.deleteFromMessageStore(message);
+        setMessageStore(updatedStore);
+    };
+
     return (
         <>
             <Box display="flex">
@@ -60,9 +65,11 @@ export const SavedMessages = ({
             <Collapse in={messagesPanelOpen} timeout="auto" unmountOnExit sx={collapseSx}>
                 <List dense>
                     {messageStore.map((message, index) => {
-                        const ListItemButtonSx: SxProps = isHebrew(message)
-                            ? { direction: 'rtl', textAlign: 'right' }
-                            : EMPTY_OBJECT;
+                        const listItemButtonSx: SxProps = getListItemButtonStyles(isHebrew(message));
+                        const onDelete = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+                            event.stopPropagation();
+                            handleDelete(message);
+                        };
                         return (
                             <ListItem
                                 key={message}
@@ -70,8 +77,11 @@ export const SavedMessages = ({
                                 divider={index !== messageStore.length - 1}
                                 onClick={() => handleMessageSelect(message)}
                             >
-                                <ListItemButton sx={ListItemButtonSx}>
+                                <ListItemButton sx={listItemButtonSx}>
                                     <ListItemText primary={message} sx={listItemTextSx} />
+                                    <IconButton sx={{ visibility: 'hidden' }} onClick={onDelete} size="small">
+                                        <DeleteIcon />
+                                    </IconButton>
                                 </ListItemButton>
                             </ListItem>
                         );
@@ -81,3 +91,14 @@ export const SavedMessages = ({
         </>
     );
 };
+
+function getListItemButtonStyles(isRtl: boolean): SxProps {
+    return {
+        '&:hover': {
+            '& button': {
+                visibility: 'visible',
+            },
+        },
+        ...(isRtl ? { direction: 'rtl', textAlign: 'right' } : undefined),
+    };
+}

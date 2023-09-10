@@ -23,7 +23,7 @@ const saveMessage = debounce((message: string) => save(KEYS.message, message), 1
 const savePhone = debounce((phone: string) => save(KEYS.phone, phone), 1000);
 const saveCountryCode = (country: Option) => save(KEYS.countryCode, country);
 const saveToMessageStore = (message: string) => {
-    const messagesStore = get(KEYS.messages) || [];
+    const messagesStore: string[] = get(KEYS.messages) || [];
     messagesStore.unshift(message);
     const updatedStore = [...new Set(messagesStore)].slice(0, 5);
     save(KEYS.messages, updatedStore);
@@ -35,6 +35,13 @@ const getPhone = (): string => get(KEYS.phone);
 const getCountryCode = () => get(KEYS.countryCode);
 const getMessageFromStore: () => string[] = () => get(KEYS.messages) || [];
 
+const deleteFromMessageStore = (message: string) => {
+    const messagesStore: string[] = get(KEYS.messages) || [];
+    const updatedStore = messagesStore.filter((item: string) => item !== message);
+    save(KEYS.messages, updatedStore);
+    return updatedStore;
+};
+
 export const localStorageService = {
     saveMessage,
     saveToMessageStore,
@@ -44,4 +51,5 @@ export const localStorageService = {
     saveCountryCode,
     getCountryCode,
     getMessageFromStore,
+    deleteFromMessageStore,
 };
