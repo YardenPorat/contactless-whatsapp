@@ -1,6 +1,6 @@
 {
   "name": "whatsapp-contactless-sender",
-  "homepage": "https://yardenporat.github.io/contactless-whatsapp/",
+  "homepage": "https://contactless-wassup.netlify.app/",
   "version": "0.1.0",
   "license": "UNLICENSED",
   "dependencies": {
@@ -22,6 +22,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "dev": "react-scripts start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
