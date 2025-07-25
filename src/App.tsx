@@ -5,7 +5,7 @@ import React, { useCallback, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import classes from './App.module.css';
 import { Snackbar } from '@mui/material';
-import { countryCodesOptions, ISRAEL, Option } from './constants/country-codes';
+import { countryCodesOptions, Option, USA } from './constants/country-codes';
 import { getPhoneWithPrefix } from './utils/sanitize-phone';
 import { localStorageService } from './services/local-storage';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
@@ -14,23 +14,12 @@ import { isHebrew } from './utils/rtl';
 import { SavedMessages } from './components/SavedMessages';
 import { Copyright } from './components/Footer';
 
-// const labelProps = {
-//     sx: {
-//         '&.MuiInputLabel-shrink': {
-//             backgroundColor: 'rgba(239,242,245,.8)',
-//             border: '1px solid #ccc',
-//             p: '1px 5px',
-//             borderRadius: '10px',
-//         },
-//     },
-// };
-
 function App() {
     const [phone, setPhone] = useState(localStorageService.getPhone());
     const [message, setMessage] = useState(localStorageService.getMessage());
 
     const [snackbarMessage, setSnackbarMessage] = useState('');
-    const [countryCode, setCountryCode] = useState(localStorageService.getCountryCode() || ISRAEL);
+    const [countryCode, setCountryCode] = useState(localStorageService.getCountryCode() || USA);
 
     const dir = isHebrew(message) ? 'rtl' : 'ltr';
 

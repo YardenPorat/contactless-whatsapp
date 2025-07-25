@@ -227,3 +227,4 @@ export const countryCodesOptions: Option[] = Object.entries(prefixes).map(([key,
 }));
 
 export const ISRAEL: Option = countryCodesOptions.find((option) => option.value === '972')!;
+export const USA: Option = countryCodesOptions.find((option) => option.value === '1')!;
